@@ -4,40 +4,31 @@ public class buzon {
     
     private int numMensajes;
     private int capMaxima;
+    private String nombre;
 
-    public buzon(int capMaxima)
+    public buzon(int capMaxima, String nombre)
     {
         this.capMaxima = capMaxima;
         this.numMensajes = 0;
+        this.nombre = nombre;
     }
 
-    public void añadirMensaje(int Thread, String msj)
+    public void añadirMensaje(int Thread, String msj) throws InterruptedException
     {
         synchronized(this)
         {   
-           while(numMensajes<capMaxima)
+           if(numMensajes<capMaxima)
            {
-              System.out.println("El proceso numero:" + Thread + " envió el mensaje " + msj );
-              numMensajes++;
-              notify();
-
+              wait();
+              System.out.println("El proceso numero:" + Thread + "se durmio" );
            }
-           
+           else
+           {
+           }
         }
     }
-
-
-    public void sacarMensaje(int Thread)
+    public void sacarMensaje()
     {
-        synchronized(this)
-        {   
-           while(numMensajes!= 0)
-           {
-              System.out.println("El proceso numero:" + Thread + "sacó el ultimo mensaje." );
-              numMensajes--;
-              notifyAll();
-           }
-        }
 
     }
 
