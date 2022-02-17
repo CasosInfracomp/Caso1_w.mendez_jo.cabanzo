@@ -1,6 +1,6 @@
 package caso1;
 
-public class extends Thread mensajero 
+public class mensajero extends Thread 
 {
 
     private int id;

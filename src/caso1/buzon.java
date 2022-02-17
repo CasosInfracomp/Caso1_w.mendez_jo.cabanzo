@@ -10,41 +10,22 @@ public class buzon {
         this.capMaxima = capMaxima;
         this.numMensajes = 0;
     }
- 
-    public void llenarBuzon(int Thread, String msj)
-    {
-         synchronized(this)
-         {   
 
-            if(numMensajes<capMaxima)
-            {
-               wait();
-               
-            }
-
-            else
-            {
-            }
-         }
-         System.out.println("El thread numero:" + Thread );
-    }
-
-    public void entrarBuzon()
+    public void añadirMensaje(int Thread, String msj) throws InterruptedException
     {
         synchronized(this)
         {   
-
-           if(numMensajes>capMaxima)
+           if(numMensajes<capMaxima)
            {
-              
+              wait();
+              System.out.println("El proceso numero:" + Thread + "se durmio" );
            }
-
            else
            {
            }
         }
     }
-    public void vaciarBuzon()
+    public void sacarMensaje()
     {
 
     }
