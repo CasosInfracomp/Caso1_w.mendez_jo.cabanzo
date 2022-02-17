@@ -11,22 +11,33 @@ public class buzon {
         this.numMensajes = 0;
     }
 
-    public void añadirMensaje(int Thread, String msj) throws InterruptedException
+    public void añadirMensaje(int Thread, String msj)
     {
         synchronized(this)
         {   
-           if(numMensajes<capMaxima)
+           while(numMensajes<capMaxima)
            {
-              wait();
-              System.out.println("El proceso numero:" + Thread + "se durmio" );
+              System.out.println("El proceso numero:" + Thread + " envió el mensaje " + msj );
+              numMensajes++;
+              notify();
+
            }
-           else
-           {
-           }
+           
         }
     }
-    public void sacarMensaje()
+
+
+    public void sacarMensaje(int Thread)
     {
+        synchronized(this)
+        {   
+           while(numMensajes!= 0)
+           {
+              System.out.println("El proceso numero:" + Thread + "sacó el ultimo mensaje." );
+              numMensajes--;
+              notifyAll();
+           }
+        }
 
     }
 
