@@ -1,8 +1,24 @@
 package caso1;
 
 public class main {
-    private buzon[] buzondes = new buzon[4];
-
+    private buzon[] buzones = new buzon[4];
+    private mensajero[] mensajeros = new mensajeros[4];
+    private int capacidadA;
+    private int capacidadB;
+    private int capacidadC;
+    private int capacidadD;
+    private int tiempo1;
+	private Boolean tipoEn1; 
+	private Boolean tipoRe1;
+	private int tiempo2;
+	private Boolean tipoEn2;
+	private Boolean tipoRe2;
+	private int tiempo3;
+	private Boolean tipoEn3;
+	private Boolean tipoRe3;
+	private int tiempo4; 
+	private Boolean tipoEn4;
+	private Boolean tipoRe4;
 
     public static void cargarDatos() {
 		Scanner sc = new Scanner(System.in);
@@ -44,7 +60,9 @@ public class main {
 	}
 
     public static void main(String[] args) {
-        
+        for (int i = 0, i<4, i++) {
+            
+        }
     }
 
 }
