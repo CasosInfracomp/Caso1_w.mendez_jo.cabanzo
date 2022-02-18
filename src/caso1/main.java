@@ -1,6 +1,7 @@
 package caso1;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
@@ -9,24 +10,13 @@ import java.util.Scanner;
 
 public class Main {
 	static String ruta = "config.properties";
-	private Buzon[] buzones = new Buzon[4];
-	private Mensajero[] mensajeros = new Mensajero[4];
-	static private int capacidadA;
-	static private int capacidadB;
-	static private int capacidadC;
-	static private int capacidadD;
-	static private int tiempo1;
-	static private Boolean tipoEn1;
-	static private Boolean tipoRe1;
-	static private int tiempo2;
-	static private Boolean tipoEn2;
-	static private Boolean tipoRe2;
-	static private int tiempo3;
-	static private Boolean tipoEn3;
-	static private Boolean tipoRe3;
-	static private int tiempo4;
-	static private Boolean tipoEn4;
-	static private Boolean tipoRe4;
+	static private Buzon[] buzones = new Buzon[4];
+	static private Mensajero[] mensajeros = new Mensajero[4];
+	static private ArrayList<Integer> capacidades = new ArrayList<Integer>();
+	static private String[] letras = {"A", "B", "C", "D"};
+	static private ArrayList<Integer> tiempos = new ArrayList<Integer>();
+	static private ArrayList<Boolean> tiposRecepcion = new ArrayList<Boolean>();
+	static private ArrayList<Boolean> tiposEnvio = new ArrayList<Boolean>();
 
 	public static void cargarDatos() {
 		Scanner sc = new Scanner(System.in);
@@ -38,22 +28,22 @@ public class Main {
 				Properties prop = new Properties();
 				prop.load(input);
 
-				capacidadA = Integer.parseInt(prop.getProperty("caso.buzonA"));
-				capacidadB = Integer.parseInt(prop.getProperty("caso.buzonB"));
-				capacidadC = Integer.parseInt(prop.getProperty("caso.buzonC"));
-				capacidadD = Integer.parseInt(prop.getProperty("caso.buzonD"));
-				tiempo1 = Integer.parseInt(prop.getProperty("caso.caso.msg1_tEspera"));
-				tipoEn1 = Boolean.parseBoolean(prop.getProperty("caso.msg1_tipoEnvio"));
-				tipoRe1 = Boolean.parseBoolean(prop.getProperty("caso.msg1_tiporecepcion"));
-				tiempo2 = Integer.parseInt(prop.getProperty("caso.caso.msg2_tEspera"));
-				tipoEn2 = Boolean.parseBoolean(prop.getProperty("caso.msg2_tipoEnvio"));
-				tipoRe2 = Boolean.parseBoolean(prop.getProperty("caso.msg2_tiporecepcion"));
-				tiempo3 = Integer.parseInt(prop.getProperty("caso.caso.msg3_tEspera"));
-				tipoEn3 = Boolean.parseBoolean(prop.getProperty("caso.msg3_tipoEnvio"));
-				tipoRe3 = Boolean.parseBoolean(prop.getProperty("caso.msg3_tiporecepcion"));
-				tiempo4 = Integer.parseInt(prop.getProperty("caso.caso.msg4_tEspera"));
-				tipoEn4 = Boolean.parseBoolean(prop.getProperty("caso.msg4_tipoEnvio"));
-				tipoRe4 = Boolean.parseBoolean(prop.getProperty("caso.msg4_tiporecepcion"));
+				capacidades.add(Integer.parseInt(prop.getProperty("caso.buzonA")));
+				capacidades.add(Integer.parseInt(prop.getProperty("caso.buzonB")));
+				capacidades.add(Integer.parseInt(prop.getProperty("caso.buzonC")));
+				capacidades.add(Integer.parseInt(prop.getProperty("caso.buzonD")));
+				tiempos.add(Integer.parseInt(prop.getProperty("caso.msg1_tEspera")));
+				tiempos.add(Integer.parseInt(prop.getProperty("caso.msg2_tEspera")));
+				tiempos.add(Integer.parseInt(prop.getProperty("caso.msg3_tEspera")));
+				tiempos.add(Integer.parseInt(prop.getProperty("caso.msg4_tEspera")));
+				tiposEnvio.add(Boolean.parseBoolean(prop.getProperty("caso.msg1_tipoEnvio")));
+				tiposEnvio.add(Boolean.parseBoolean(prop.getProperty("caso.msg2_tipoEnvio")));
+				tiposEnvio.add(Boolean.parseBoolean(prop.getProperty("caso.msg3_tipoEnvio")));
+				tiposEnvio.add(Boolean.parseBoolean(prop.getProperty("caso.msg4_tipoEnvio")));
+				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg1_tiporecepcion")));
+				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg2_tiporecepcion")));
+				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg3_tiporecepcion")));
+				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg4_tiporecepcion")));
 				System.out.println("Configuración cargada");
 				carga = true;
 				sc.close();
@@ -68,13 +58,23 @@ public class Main {
 		}
 	}
 
+	private static void poblar() {
+		for (int i = 0; i < 4; i++) {
+			buzones[i] = new Buzon(capacidades.get(i), letras[i]);
+			mensajeros[i] = new Mensajero(i, tiposRecepcion.get(i), tiposEnvio.get(i));
+		}
+		System.out.println("Entidades creadas");
+		for (int i = 0; i < 4; i++) {
+			mensajeros[i].start();
+			System.out.println("Mensajero " + i + " iniciado");
+		}
+	}
+
 	public static void main(String[] args) {
 
 		cargarDatos();
+		poblar();
 
-		for (int i = 0; i < 4; i++) {
-
-		}
 	}
 
 }
