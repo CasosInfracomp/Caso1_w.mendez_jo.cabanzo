@@ -1,16 +1,16 @@
 package caso1;
 
 import java.io.InputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.util.Properties;
 import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
 	static String ruta = "config.properties";
-	private buzon[] buzones = new buzon[4];
-	private mensajero[] mensajeros = new mensajero[4];
+	private Buzon[] buzones = new Buzon[4];
+	private Mensajero[] mensajeros = new Mensajero[4];
 	static private int capacidadA;
 	static private int capacidadB;
 	static private int capacidadC;
@@ -69,6 +69,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+
+		cargarDatos();
+
 		for (int i = 0; i < 4; i++) {
 
 		}
