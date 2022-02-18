@@ -9,7 +9,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
-	static String ruta = "config.properties";
+	static String ruta = "Caso1_w.mendez_jo.cabanzo\\config.properties";
 	static private Buzon[] buzones = new Buzon[4];
 	static private Mensajero[] mensajeros = new Mensajero[4];
 	static private ArrayList<Integer> capacidades = new ArrayList<Integer>();
