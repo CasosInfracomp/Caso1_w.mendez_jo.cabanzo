@@ -1,31 +1,40 @@
 package caso1;
 
-public class main {
-    private buzon[] buzones = new buzon[4];
-    private mensajero[] mensajeros = new mensajeros[4];
-    private int capacidadA;
-    private int capacidadB;
-    private int capacidadC;
-    private int capacidadD;
-    private int tiempo1;
-	private Boolean tipoEn1; 
-	private Boolean tipoRe1;
-	private int tiempo2;
-	private Boolean tipoEn2;
-	private Boolean tipoRe2;
-	private int tiempo3;
-	private Boolean tipoEn3;
-	private Boolean tipoRe3;
-	private int tiempo4; 
-	private Boolean tipoEn4;
-	private Boolean tipoRe4;
+import java.io.InputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Properties;
+import java.util.Scanner;
 
-    public static void cargarDatos() {
+public class Main {
+	static String ruta = "config.properties";
+	private buzon[] buzones = new buzon[4];
+	private mensajero[] mensajeros = new mensajero[4];
+	static private int capacidadA;
+	static private int capacidadB;
+	static private int capacidadC;
+	static private int capacidadD;
+	static private int tiempo1;
+	static private Boolean tipoEn1;
+	static private Boolean tipoRe1;
+	static private int tiempo2;
+	static private Boolean tipoEn2;
+	static private Boolean tipoRe2;
+	static private int tiempo3;
+	static private Boolean tipoEn3;
+	static private Boolean tipoRe3;
+	static private int tiempo4;
+	static private Boolean tipoEn4;
+	static private Boolean tipoRe4;
+
+	public static void cargarDatos() {
 		Scanner sc = new Scanner(System.in);
+		boolean carga = false;
 		while (!carga) {
 			// Carga de datos del archivo Properties
 			try {
-				InputStream input = new FileInputStream("config.properties");
+				InputStream input = new FileInputStream(ruta);
 				Properties prop = new Properties();
 				prop.load(input);
 
@@ -51,7 +60,7 @@ public class main {
 			} catch (FileNotFoundException ex) {
 				System.out.println("No se encontró el archivo.");
 				System.out.println("Por favor ingresa la ruta del archivo de propiedades:");
-				pathToProperties = sc.nextLine();
+				ruta = sc.nextLine();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -59,10 +68,10 @@ public class main {
 		}
 	}
 
-    public static void main(String[] args) {
-        for (int i = 0, i<4, i++) {
-            
-        }
-    }
+	public static void main(String[] args) {
+		for (int i = 0; i < 4; i++) {
+
+		}
+	}
 
 }

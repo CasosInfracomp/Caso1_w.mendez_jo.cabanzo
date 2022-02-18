@@ -1,12 +1,12 @@
 package caso1;
 
-public class buzon {
-    
+public class Buzon {
+
     private int numMensajes;
     private int capMaxima;
     private String nombre;
 
-    public buzon(int capMaxima, String nombre)
+    public Buzon(int capMaxima, String nombre)
     {
         this.capMaxima = capMaxima;
         this.numMensajes = 0;
@@ -16,7 +16,7 @@ public class buzon {
     public void añadirMensaje(int Thread, String msj) throws InterruptedException
     {
         synchronized(this)
-        {   
+        {
            if(numMensajes<capMaxima)
            {
               wait();
