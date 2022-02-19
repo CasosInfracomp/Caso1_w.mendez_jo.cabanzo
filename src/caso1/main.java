@@ -61,7 +61,7 @@ public class Main {
 	private static void poblar() {
 		for (int i = 0; i < 4; i++) {
 			buzones[i] = new Buzon(capacidades.get(i), letras[i]);
-			mensajeros[i] = new Mensajero(i, tiposRecepcion.get(i), tiposEnvio.get(i));
+			mensajeros[i] = new Mensajero(i, tiposRecepcion.get(i), tiposEnvio.get(i), tiempos.get(i));
 		}
 		System.out.println("Entidades creadas");
 		for (int i = 0; i < 4; i++) {
@@ -70,10 +70,19 @@ public class Main {
 		}
 	}
 
+		private static void enviarMensaje(String msg) {
+			buzones[0].
+		}
+
 	public static void main(String[] args) {
 
+		int cantidadMensajes = Integer.parseInt(new Scanner(System.in).nextLine());
 		cargarDatos();
 		poblar();
+
+		for (int i = 0; i < cantidadMensajes; i++) {
+			enviarMensaje("Mensaje " + i);
+		}
 
 	}
 
