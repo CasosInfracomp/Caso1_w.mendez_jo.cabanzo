@@ -70,9 +70,9 @@ public class Main {
 		}
 	}
 
-		private static void enviarMensaje(String msg) {
-			buzones[0].
-		}
+	private static void enviarMensaje(String msg) 
+    {
+	}
 
 	public static void main(String[] args) {
 

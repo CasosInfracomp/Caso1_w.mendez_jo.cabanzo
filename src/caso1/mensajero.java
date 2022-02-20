@@ -18,6 +18,8 @@ public class Mensajero extends Thread {
     @Override
     public void run() {
         while (corriendo) {
+
+            entrar();
             recoger();
             escribir();
             entregar();
@@ -32,6 +34,10 @@ public class Mensajero extends Thread {
     }
 
     private void recoger() {
+
+    }
+
+    private void entrar() {
     }
 
 }
