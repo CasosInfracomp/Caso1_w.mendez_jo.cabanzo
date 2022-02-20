@@ -66,6 +66,7 @@ public class Mensajero extends Thread {
             msgActual = buzonRecoger.sacarMensajePasivo(id);
         }
         if (msgActual.contains("FIN")) {
+            Main.barrera = true;
             corriendo = false;
         }
     }

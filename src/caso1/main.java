@@ -20,7 +20,7 @@ public class Main {
 	static private ArrayList<Integer> tiempos = new ArrayList<Integer>();
 	static private ArrayList<Boolean> tiposRecepcion = new ArrayList<Boolean>();
 	static private ArrayList<Boolean> tiposEnvio = new ArrayList<Boolean>();
-	static public int barrera = 4;
+	static public boolean barrera = false;
 
 	public static void cargarDatos() {
 		Scanner sc = new Scanner(System.in);
@@ -113,6 +113,9 @@ public class Main {
 		}
 		enviarMensaje("FIN");
 
+		while(!barrera) {
+			
+		}
 		for (int i = 0; i < cantidadMensajes; i++) {
 			System.out.println(buzones[0].sacarMensajePasivo(0));
 		}
