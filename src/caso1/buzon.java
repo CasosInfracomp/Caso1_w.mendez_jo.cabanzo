@@ -1,14 +1,15 @@
 package caso1;
 
-public class buzon {
-    
+public class Buzon {
+
     private int numMensajes;
     private int capMaxima;
+    private String nombre;
 
-    public buzon(int capMaxima)
-    {
-        this.capMaxima = capMaxima;
+    public Buzon(int capMaxima, String nombre) {
         this.numMensajes = 0;
+        this.capMaxima = capMaxima;
+        this.nombre = nombre;
     }
 
     public void entrarProceso(int Thread, String msj)
@@ -62,6 +63,5 @@ public class buzon {
         }
 
     }
-
 
 }
