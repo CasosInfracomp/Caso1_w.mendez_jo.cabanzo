@@ -46,8 +46,8 @@ public class Buzon {
     /* Permite escribir en buzon */
     public void aniadirMensajePasivo(int idThread, String msj) {
         boolean esperando = true;
-        synchronized (this) {
-            while (esperando) {
+        while (esperando) {
+            synchronized (this) {
                 if (numMensajes < capMaxima) {
                     mensajes.add(msj);
                     numMensajes++;
@@ -71,8 +71,8 @@ public class Buzon {
 
     public void aniadirMensajeActivo(int idThread, String msj) {
         boolean esperando = true;
-        synchronized (this) {
-            while (esperando) {
+        while (esperando) {
+            synchronized (this) {
                 if (numMensajes + 1 < capMaxima) {
                     numMensajes++;
                     ultimoMensaje = msj;
@@ -90,8 +90,8 @@ public class Buzon {
     public String sacarMensajeActivo(int Thread) {
         boolean esperando = true;
         String retorno = "";
-        synchronized (this) {
-            while (esperando) {
+        while (esperando) {
+            synchronized (this) {
                 if (numMensajes != 0) {
                     System.out.println("- " + Thread + ": " + mensajes.get(0) + " b:" + nombre);
                     numMensajes--;
@@ -100,12 +100,13 @@ public class Buzon {
                     esperando = false;
                 } else {
                     // try {
-                    //     wait(200);
+                    // wait(200);
                     // } catch (InterruptedException e) {
-                    //     // TODO Auto-generated catch block
-                    //     e.printStackTrace();
+                    // // TODO Auto-generated catch block
+                    // e.printStackTrace();
                     // }
-                    // System.out.println(Thread + " trato de sacar un mensaje pero " + nombre + " esta vacio");
+                    // System.out.println(Thread + " trato de sacar un mensaje pero " + nombre + "
+                    // esta vacio");
                 }
             }
         }
@@ -121,11 +122,12 @@ public class Buzon {
                     System.out.println("- " + idThread + ": " + mensajes.get(0) + " b:" + nombre);
                     numMensajes--;
                     notifyAll();
-                    retorno =  mensajes.remove(0);
+                    retorno = mensajes.remove(0);
                     esperando = false;
                 } else {
                     // System.out
-                    //         .println(idThread + " trato de sacar un mensaje pero " + nombre + " esta vacio");
+                    // .println(idThread + " trato de sacar un mensaje pero " + nombre + " esta
+                    // vacio");
                     try {
                         wait();
                     } catch (InterruptedException e) {
