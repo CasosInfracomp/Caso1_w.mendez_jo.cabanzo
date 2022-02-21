@@ -48,7 +48,9 @@ public class Main {
 				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg2_tiporecepcion")));
 				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg3_tiporecepcion")));
 				tiposRecepcion.add(Boolean.parseBoolean(prop.getProperty("caso.msg4_tiporecepcion")));
+				System.out.println("====================================");
 				System.out.println("Configuración cargada");
+				System.out.println("====================================");
 				carga = true;
 			} catch (FileNotFoundException ex) {
 				System.out.println("No se encontró el archivo.");
@@ -68,6 +70,7 @@ public class Main {
 		for (int i = 0; i < 4; i++) {
 			mensajeros[i] = new Mensajero(i, buzones, tiposRecepcion.get(i), tiposEnvio.get(i), tiempos.get(i));
 		}
+		System.out.println("====================================");
 		System.out.println("Entidades creadas");
 	}
 
@@ -89,10 +92,14 @@ public class Main {
 
 		boolean entrada = true;
 		int cantidadMensajes = -1;
-		while (entrada) {
+		while (cantidadMensajes == -1) {
 			System.out.println("====================================");
 			System.out.println("Cantidad de mensajes: ");
-			cantidadMensajes = new Scanner(System.in).nextInt();
+			try {
+				cantidadMensajes = new Scanner(System.in).nextInt();
+			} catch (Exception e) {
+				System.out.println("Ingrese un numero valido");
+			}
 
 			int total = 0;
 			for (int i = 0; i < 4; i++) {
@@ -109,12 +116,15 @@ public class Main {
 		iniciar();
 
 		for (int i = 0; i < cantidadMensajes; i++) {
-			enviarMensaje("Msg " + i);
+			enviarMensaje("Msg " + (i + 1));
 		}
 		enviarMensaje("FIN");
 
-		while(!barrera) {
-			barrera = checkBarrera();
+		while (!barrera) {
+			if (!mensajeros[0].isAlive()) {
+				break;
+
+			}
 		}
 		if (barrera) {
 			for (int i = 0; i < cantidadMensajes; i++) {
@@ -122,10 +132,6 @@ public class Main {
 			}
 		}
 
-	}
-
-	private static boolean checkBarrera() {
-		return barrera;
 	}
 
 }

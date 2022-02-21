@@ -22,6 +22,11 @@ public class Mensajero extends Thread {
                 "Mensajero " + id + " sacar " + buzonRecoger.getNombre() + " entregar " + buzonEntregar.getNombre());
     }
 
+
+    public boolean isCorriendo() {
+        return corriendo;
+    }
+
     @Override
     public void run() {
         while (corriendo) {

@@ -7,7 +7,6 @@ public class Buzon {
     private int numMensajes;
     private int capMaxima;
     private String nombre;
-    private String ultimoMensaje;
     private ArrayList<String> mensajes;
 
     public Buzon(int capMaxima, String nombre) {
@@ -25,38 +24,20 @@ public class Buzon {
         return nombre;
     }
 
-    /*
-     * Verifica la entrada de un mensajero activo al buzon. Lo deja esperando si la
-     * capacidad de mensajes esta llena. Continua si no es así
-     */
-    public void entrarProceso(int Thread, String msj) {
-        synchronized (this) {
-            while (numMensajes <= capMaxima) {
-                try {
-                    System.out.println("El proceso numero:" + Thread + " se durmió");
-                    wait();
-                } catch (Exception e) {
-                    System.out.println("Fallo al dormir proceso" + Thread);
-                }
-            }
-        }
-
-    }
-
     /* Permite escribir en buzon */
     public void aniadirMensajePasivo(int idThread, String msj) {
         boolean esperando = true;
         while (esperando) {
             synchronized (this) {
-                if (numMensajes < capMaxima) {
+                if (numMensajes <= capMaxima) {
                     mensajes.add(msj);
                     numMensajes++;
                     ultimoMensaje = msj;
-                    System.out.println("+ " + idThread + ": " + msj + " b:" + nombre);
+                    System.out.println("El mensajero " + idThread + " agrego: " + msj + " al buzon: " + nombre);
                     notifyAll();
                     esperando = false;
                 } else {
-                    System.out.println(nombre + " esta lleno, no puede agregar el mensaje: " + msj);
+                    System.out.println(nombre + " esta lleno, no puede agregar: " + msj);
                     System.out.println(idThread + " se durmio");
                     try {
                         wait();
@@ -73,11 +54,11 @@ public class Buzon {
         boolean esperando = true;
         while (esperando) {
             synchronized (this) {
-                if (numMensajes + 1 < capMaxima) {
+                if (numMensajes + 1 <= capMaxima) {
                     numMensajes++;
                     ultimoMensaje = msj;
                     mensajes.add(msj);
-                    System.out.println(("+ " + idThread + ": " + msj + " b:" + nombre));
+                    System.out.println(("El mensajero " + idThread + " agrego: " + msj + " al buzon: " + nombre));
                     notifyAll();
                     esperando = false;
                 }
@@ -93,18 +74,13 @@ public class Buzon {
         while (esperando) {
             synchronized (this) {
                 if (numMensajes != 0) {
-                    System.out.println("- " + Thread + ": " + mensajes.get(0) + " b:" + nombre);
+                    System.out.println("El mensajero " + Thread + " saco: " + mensajes.get(0) + " del buzon:" + nombre);
                     numMensajes--;
                     notifyAll();
                     retorno = mensajes.remove(0);
                     esperando = false;
                 } else {
-                    // try {
-                    // wait(200);
-                    // } catch (InterruptedException e) {
-                    // e.printStackTrace();
-                    // }
-                    // System.out.println(Thread + " trato de sacar un mensaje pero " + nombre + " esta vacio");
+                    // System.out.println(nombre + " esta vacio");
                 }
             }
         }
@@ -117,14 +93,13 @@ public class Buzon {
         while (esperando) {
             synchronized (this) {
                 if (numMensajes != 0) {
-                    System.out.println("- " + idThread + ": " + mensajes.get(0) + " b:" + nombre);
+                    System.out.println("El mensajero " + idThread + " saco: " + mensajes.get(0) + " del buzon:" + nombre);
                     numMensajes--;
                     notifyAll();
                     retorno = mensajes.remove(0);
                     esperando = false;
                 } else {
-                    // System.out
-                    //         .println(idThread + " trato de sacar un mensaje pero " + nombre + " esta vacio");
+                    // System.out.println(nombre + " esta vacio");
                     try {
                         wait();
                     } catch (InterruptedException e) {
@@ -134,10 +109,6 @@ public class Buzon {
             }
         }
         return retorno;
-    }
-
-    public String darUltimoMensaje() {
-        return ultimoMensaje;
     }
 
 }
