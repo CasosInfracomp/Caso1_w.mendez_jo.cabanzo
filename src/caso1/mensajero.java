@@ -17,8 +17,9 @@ public class Mensajero extends Thread {
         this.tipoSalida = tipoSalida;
         this.tEspera = tEspera;
         this.buzonRecoger = buzones[id];
-        this.buzonEntregar = buzones[(id + 1)%4];
-        System.out.println("Mensajero " + id + " sacar " + buzonRecoger.getNombre() + " entregar " + buzonEntregar.getNombre());
+        this.buzonEntregar = buzones[(id + 1) % 4];
+        System.out.println(
+                "Mensajero " + id + " sacar " + buzonRecoger.getNombre() + " entregar " + buzonEntregar.getNombre());
     }
 
     @Override

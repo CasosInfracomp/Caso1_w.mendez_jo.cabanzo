@@ -114,12 +114,18 @@ public class Main {
 		enviarMensaje("FIN");
 
 		while(!barrera) {
-			
+			barrera = checkBarrera();
 		}
-		for (int i = 0; i < cantidadMensajes; i++) {
-			System.out.println(buzones[0].sacarMensajePasivo(0));
+		if (barrera) {
+			for (int i = 0; i < cantidadMensajes; i++) {
+				System.out.println(buzones[0].sacarMensajePasivo(0));
+			}
 		}
 
+	}
+
+	private static boolean checkBarrera() {
+		return barrera;
 	}
 
 }

@@ -102,11 +102,9 @@ public class Buzon {
                     // try {
                     // wait(200);
                     // } catch (InterruptedException e) {
-                    // // TODO Auto-generated catch block
                     // e.printStackTrace();
                     // }
-                    // System.out.println(Thread + " trato de sacar un mensaje pero " + nombre + "
-                    // esta vacio");
+                    // System.out.println(Thread + " trato de sacar un mensaje pero " + nombre + " esta vacio");
                 }
             }
         }
@@ -126,8 +124,7 @@ public class Buzon {
                     esperando = false;
                 } else {
                     // System.out
-                    // .println(idThread + " trato de sacar un mensaje pero " + nombre + " esta
-                    // vacio");
+                    //         .println(idThread + " trato de sacar un mensaje pero " + nombre + " esta vacio");
                     try {
                         wait();
                     } catch (InterruptedException e) {
