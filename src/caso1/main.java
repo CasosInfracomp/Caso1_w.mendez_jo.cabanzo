@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
-	static String ruta = "Caso1_w.mendez_jo.cabanzo\\config.properties";
+	static String ruta = "./config.properties";
 	static private Buzon[] buzones = new Buzon[4];
 	static private Mensajero[] mensajeros = new Mensajero[4];
 	static private ArrayList<Integer> capacidades = new ArrayList<Integer>();
@@ -82,7 +82,7 @@ public class Main {
 	}
 
 	private static void enviarMensaje(String msg) {
-		buzones[0].aniadirMensajeActivo(0, msg);
+		buzones[0].aniadirMensajePasivo(0, msg);
 	}
 
 	public static void main(String[] args) {
@@ -122,12 +122,13 @@ public class Main {
 
 		while (!barrera) {
 			if (!mensajeros[0].isAlive()) {
-				break;
+				entrada = false;
+				barrera = true;
 
 			}
 		}
 		if (barrera) {
-			for (int i = 0; i < cantidadMensajes; i++) {
+			for (int i = 0; i <= cantidadMensajes; i++) {
 				System.out.println(buzones[0].sacarMensajePasivo(0));
 			}
 		}

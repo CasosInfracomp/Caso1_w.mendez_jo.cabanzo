@@ -32,7 +32,6 @@ public class Buzon {
                 if (numMensajes <= capMaxima) {
                     mensajes.add(msj);
                     numMensajes++;
-                    ultimoMensaje = msj;
                     System.out.println("El mensajero " + idThread + " agrego: " + msj + " al buzon: " + nombre);
                     notifyAll();
                     esperando = false;
@@ -50,20 +49,20 @@ public class Buzon {
 
     }
 
-    public void aniadirMensajeActivo(int idThread, String msj) {
-        boolean esperando = true;
-        while (esperando) {
-            synchronized (this) {
-                if (numMensajes + 1 <= capMaxima) {
-                    numMensajes++;
-                    ultimoMensaje = msj;
-                    mensajes.add(msj);
-                    System.out.println(("El mensajero " + idThread + " agrego: " + msj + " al buzon: " + nombre));
-                    notifyAll();
-                    esperando = false;
-                }
-            }
-        }
+    public boolean aniadirMensajeActivo(int idThread, String msj) {
+    	boolean esperando = true;
+    	synchronized (this) {
+    		if (numMensajes + 1 <= capMaxima) {
+    			numMensajes++;
+    			mensajes.add(msj);
+    			System.out.println(("El mensajero " + idThread + " agrego: " + msj + " al buzon: " + nombre));
+    			notifyAll();
+    			esperando = false;
+    		} else {
+				System.out.println("El buzon " + nombre + " esta lleno");
+			}
+    	}
+    	return esperando;
     }
 
     /* Permite escribir en buzon */
@@ -80,7 +79,7 @@ public class Buzon {
                     retorno = mensajes.remove(0);
                     esperando = false;
                 } else {
-                    // System.out.println(nombre + " esta vacio");
+//                     System.out.println(nombre + " esta vacio");
                 }
             }
         }

@@ -43,11 +43,16 @@ public class Mensajero extends Thread {
     private void entregar() {
         if (!msgActual.isEmpty()) {
             if (tipoSalida) {
-                buzonEntregar.aniadirMensajeActivo(id, msgActual);
+            	boolean esperando = true;
+				while (esperando) {
+					esperando = buzonEntregar.aniadirMensajeActivo(id, msgActual);
+					Thread.yield();
+				}
             } else {
                 buzonEntregar.aniadirMensajePasivo(id, msgActual);
             }
         }
+        msgActual = "";
     }
 
     private void escribir() {
@@ -67,7 +72,10 @@ public class Mensajero extends Thread {
 
     private void recoger() {
         if (tipoEntrada) {
-            msgActual = buzonRecoger.sacarMensajeActivo(id);
+        	while (msgActual.isEmpty()) {
+        		msgActual = buzonRecoger.sacarMensajeActivo(id);	
+        		Thread.yield();
+			}
         } else {
             msgActual = buzonRecoger.sacarMensajePasivo(id);
         }
